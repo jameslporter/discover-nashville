@@ -1,3 +1,4 @@
+$( document ).ready(function() {
 // Construct the catalog query string
 url = 'http://data.nashville.gov/resource/bta3-7qkc.json';
 
@@ -19,3 +20,4 @@ $.getJSON(url, function(data, textstatus) {
         });
     }); // end $.each
 }); // end $.getJSON
+});
