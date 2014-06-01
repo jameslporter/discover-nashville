@@ -1,5 +1,6 @@
-function fetchAndMark(url,infoTemplate){
-
+function fetchAndMark(url,infoTemplate,category){
+if(category == null){ category = 'default';}
+categories[category] = [];
 $.getJSON(url, function(data, textstatus) {
 
     //console.log(data);
@@ -12,13 +13,15 @@ $.getJSON(url, function(data, textstatus) {
             map: map,
             title: entry.title
         });
+        categories[category].push(marker);
         var contentString = _.template(infoTemplate,entry);
         var infowindow = new google.maps.InfoWindow({
             content: contentString,
-            maxWidth: 150
+            maxWidth: 180
         });
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
+            $.each(openwindows,function(k,w){w.close();});
             openwindows.push(infowindow);
         });
     }); // end $.each
